@@ -1,0 +1,16 @@
+(define (expmod base exp m)
+    (cond ((= exp 0) 1)
+          ((even? exp) (non-triv (expmod base (/ exp 2) m) m))
+          (else (remainder (* base (expmod base (- exp 1) m)) m))))
+
+(define (non-triv a n)
+    (cond ((and (not (or (= a 1) (= a (- n 1)))) (= (remainder (square a) n) 1)) 0)
+          (else (remainder (square a) n))))
+
+(define (prime? n)
+    (define (miller-rabin-prime? a)
+        (= (expmod a (- n 1) n) 1))
+    (define (miller-rabin-iter a)
+        (cond ((< a n) (if (miller-rabin-prime? a) (miller-rabin-iter (+ a 1)) false))
+              (else true)))
+    (miller-rabin-iter 1))
