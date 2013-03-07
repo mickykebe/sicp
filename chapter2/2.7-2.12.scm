@@ -92,3 +92,17 @@
                 (make-interval (* x-lo y-hi) (* x-lo y-lo)))
             ((and (negative? x-lo) (negative? x-hi) (negative? y-lo) (negative? y-hi)) 
                 (make-interval (* x-hi y-hi) (* x-lo y-lo))))))
+
+(define (make-center-width c w)
+    (make-interval (- c w) (+ c w)))
+
+(define (center i)
+    (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+;2.12
+(define (make-center-percent c p)
+    (let ((width (* c (/ p 100))))
+        (make-interval (- c width) (+ c width))))
+
+(define (percent i)
+    (/ (* (width i) 100) (center i)))
