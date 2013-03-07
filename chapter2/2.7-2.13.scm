@@ -106,3 +106,14 @@
 
 (define (percent i)
     (/ (* (width i) 100) (center i)))
+
+;2.13
+;1 ]=> (percent (mul-interval (make-center-percent 4 1) (make-center-percent 4 2)))
+
+;Value: 5000/1667 ~ 3
+
+;1 ]=> (percent (mul-interval (make-center-percent 4 3) (make-center-percent 4 4)))
+
+;Value: 17500/2503 ~ 7
+
+;Therefore [percentage-tolerance (r1*r2) = percentage-tolerance(r1) + percentage-tolerance(r2)] for small percentages
