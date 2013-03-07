@@ -117,3 +117,55 @@
 ;Value: 17500/2503 ~ 7
 
 ;Therefore [percentage-tolerance (r1*r2) = percentage-tolerance(r1) + percentage-tolerance(r2)] for small percentages
+
+(define (par1 r1 r2)
+    (div-interval (mul-interval r1 r2) (add-interval r1 r2)))
+
+(define (par2 r1 r2)
+    (let ((one (make-interval 1 1)))
+        (div-interval one 
+                      (add-interval (div-interval one r1) 
+                                    (div-interval one r2)))))
+
+;2.14
+(define a (make-interval 3.92 4.08))
+
+;Value: a
+
+(define b (make-interval 4.95 5.05))
+
+;Value: b
+
+(print-interval (par1 a b))
+
+;(2.1253012048192774 - 2.322886133032694)
+;Unspecified return value
+
+(print-interval (par2 a b))
+
+;(2.187598647125141 - 2.256736035049288)
+;Unspecified return value
+
+;2.15
+
+;According to wikipedia
+;If an interval occurs several times in a calculation using parameters, and each occurrence is taken independently then this can
+;lead to an unwanted expansion of the resulting intervals.
+
+(define one (make-interval 1 1))
+
+;Value: one
+
+(center one)
+
+;Value: 1
+
+(center (div-interval a a))
+
+;Value: 1.000800320128051
+
+(center (div-interval (div-interval a a) (div-interval a a)))
+
+;Value: 1.0032025615368196
+
+;Therefore par2 is a better solution
