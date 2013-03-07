@@ -23,8 +23,8 @@
 
 ;2.8
 (define (sub-interval x y)
-    (let ((low (- (lower-bound x) (upper-bound y)))
-          (hig (- (upper-bound x) (lower-bound y)))
+    (let ((s1 (- (lower-bound x) (upper-bound y)))
+          (s2 (- (upper-bound x) (lower-bound y)))
           (s3 (- (upper-bound x) (lower-bound y)))
           (s4 (- (upper-bound x) (upper-bound y))))
             (make-interval (min s1 s2 s3 s4) (max s1 s2 s3 s4))))
