@@ -52,3 +52,10 @@
 ;#f
 (define (div-function-abide? interval1 interval2)
     (= (width (div-interval interval1 interval2)) (/ (width interval1) (width interval2))))
+
+;2.10
+(define (span-zero? interval)
+    (= (width interval) 0))
+
+(define (div-interval x y)
+    (if (span-zero? y) (error "division by 0") (mul-interval x (make-interval (/ 1.0 (lower-bound y)) (/ 1.0 (upper-bound y))))))
