@@ -18,7 +18,7 @@
 (define (enumerate-interval low high)
     (if (> low high)
         nil
-        (cons low (enumerate-interval (+ low 1) high)))
+        (cons low (enumerate-interval (+ low 1) high))))
 
 (define (enumerate-tree tree)
     (cond   ((null? tree) nil)
@@ -33,9 +33,9 @@
                      (filter odd? 
                              (enumerate-tree tree)))))
 ;(define (fib n)
-;    (if (< (- n 1) 1)
-;        1
-;        (+ (fib (- n 1)) (fib (- n 2)))))
+;    (cond ((= n 0) 0)
+;          ((= n 1) 1)
+;          (else (+ (fib (- n 1)) (fib (- n 2))))))
 
 (define (even-fibs n)
     (accumulate cons
@@ -43,4 +43,16 @@
                 (filter even?
                         (map fib
                              (enumerate-interval 0 n)))))
-    
+
+(define (list-fib-squares n)
+    (accumulate cons
+                nil
+                (map square
+                     (map fib
+                          (enumerate-interval 0 n)))))
+
+(define (product-of-squares-of-odd-elements sequence)
+    (accumulate *
+                1
+                (map square
+                     (filter odd? sequence))))
