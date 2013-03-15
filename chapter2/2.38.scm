@@ -16,4 +16,4 @@
 (fold-right list nil (list 1 2 3)) ;(list 1 (list 2 (list 3 ())))
 (fold-left list nil (list 1 2 3)) ;(list (list (list nil 1) 2) 3)
 
-; The operation op has to satisfy the condition (x op y == y op x) for the results of fold-left & fold-left to be equal
+; The operation op has to satisfy the condition (x op y = y op x) for the results of fold-left & fold-left to be equal
