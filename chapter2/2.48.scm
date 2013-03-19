@@ -6,5 +6,3 @@
 
 (define (end-segment s)
     (cdr s))
-
-make-segment and selectors start-segment and end-segment.
