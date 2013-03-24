@@ -32,3 +32,6 @@
 ;        1   / \
 ;         \  7 11  
 ;          3
+
+;B)
+; Order of growth = O(N)
