@@ -1,0 +1,5 @@
+(define (lookup key set-of-records)
+    (cond ((null? set-of-records) false)
+          ((= key (key (car set-of-records))) (car set-of-records))
+          ((< key (key (car set-of-records))) (lookup key (left-branch set-of-records)))
+          ((> key (key (car set-of-records))) (lookup key (right-branch set-of-records)))))
