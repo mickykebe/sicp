@@ -40,8 +40,6 @@
           (else (list base '** exponent))))
 
 ;b
-(define (next
-
 (define (sum? x)
     (and (pair? x) 
          (or (eq? (cadr x) '+)
