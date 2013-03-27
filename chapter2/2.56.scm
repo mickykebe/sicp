@@ -26,7 +26,7 @@
                   (b (base exp)))
              (make-product (make-product 
                                 e 
-                                (make-exponentiation b (- e 1)))
+                                (make-exponentiation b (make-sum e -1)))
                            (deriv b var))))
         (else
          (error "unknown expression type -- DERIV" exp))))
