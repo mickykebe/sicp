@@ -22,9 +22,9 @@
     (if (null? files)
         '()
         (let ((r (get-record (car file) employee-name)))
-            (if (null? r)
-                (find-employee-record employee-name (cdr files))
-                r))))
+            (if r
+                r
+                (find-employee-record employee-name (cdr files))))))
 
 ; d
-; Upon the addition of a division, one only has to populate entries into the 2 dispatch tables.
+; Upon the addition of a division, one only has to populate entries into the 2 dispatch tables. 
