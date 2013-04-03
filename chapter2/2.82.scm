@@ -4,7 +4,7 @@
       (if proc
           (apply proc (map contents args))
           (if (and (> (length args) 1) 
-                   (null? (filter (lambda (tag) (not (= (tag) (car type-tags)))) (cdr type-tags))))
+                   (null? (filter (lambda (tag) (not (eq? (tag) (car type-tags)))) (cdr type-tags))))
               (let ((valid-coerc-procs 
                         (map (lambda (coerced-proc-list) 
                                 (if (not (= (length coerced-proc-list) (length all-tags)))
