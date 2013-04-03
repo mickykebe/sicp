@@ -1,0 +1,21 @@
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (if (and (> (length args) 1) 
+                   (null? (filter (lambda (tag) (not (= (tag) (car type-tags)))) (cdr type-tags))))
+              (let ((valid-coerc-procs 
+                        (map (lambda (coerced-proc-list) 
+                                (if (not (= (length coerced-proc-list) (length all-tags)))
+                                    '()
+                                    (car coerced-proc-list)))
+                             (map (lambda (tag) (filter (lambda (coerc-proc) (not (null? coerc-proc))) 
+                                                        (map (lambda (sub-tag) (get-coercion tag sub-tag)) 
+                                                             all-tags)))
+                                  all-tags))))
+                    (if (null? valid-coerc-procs)
+                        (error "No method for these types")
+                        (apply apply-generic op (map (car valid-coerc-procs) args))))
+              (error "No method for these types"
+                     (list op type-tags)))))))
