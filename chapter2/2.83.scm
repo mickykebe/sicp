@@ -10,7 +10,7 @@
 
 ;rational-package
 (define (raise num)
-    (make-real (/ (numer num) (denom num)))) ; Depends on representations of real no.s & implementation of make-real
+    (make-real (exact->inexact (/ (numer num) (denom num))))) 
 
 (put 'raise '(rational) raise)
 
