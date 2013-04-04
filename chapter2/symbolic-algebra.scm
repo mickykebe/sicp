@@ -1,6 +1,3 @@
-
-
-
 (define (install-polynomial-package)
   ;; internal procedures
   ;; representation of poly
