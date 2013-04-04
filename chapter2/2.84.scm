@@ -23,6 +23,8 @@
                         (raise-iter (map raise same-levels) rest))))))
     (raise-iter (list (car args)) (cdr args)))
 
+(define (same-level? datum1 datum2)
+    (eq? (type-tag datum1) (type-tag datum2)))
 
 (define (higher? datum1 datum2)
     (let ((datum2-raiser (get 'raise (type-tag datum2))))
