@@ -13,19 +13,19 @@
 (define (project num)
     (make-integer (numer num)))
 
-(put 'project 'rational project)
+(put 'project '(rational) project)
 
 ;real package
 (define (project num)
     (make-integer (round num)))
 
-(put 'project 'real project)
+(put 'project '(real) project)
 
 ;complex package
 (define (project num)
     (make-real (real-part num)))
 
-(put 'project 'complex project)
+(put 'project '(complex) project)
 
 ;apply generic modified
 
