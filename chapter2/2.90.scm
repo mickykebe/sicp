@@ -82,9 +82,14 @@
 
   (define (sub-poly p1 p2)
     (if (same-variable? (variable p1) (variable p2))
-        (add-poly p1 (negate p2))
-        (error "Polys not in same var -- ADD-POLY"
+        (make-poly (variable p1) 
+                   (sub-terms (term-list p1)
+                              (term-list p2)))
+        (error "Polys not in same var -- SUB-POLY"
                (list p1 p2))))
+
+  (define (sub-terms L1 L2)
+    (add-terms L1 (negate-terms L2)))
 
   (define (sparse-poly->dense-poly) (...))
 
@@ -195,9 +200,14 @@
 
   (define (sub-poly p1 p2)
     (if (same-variable? (variable p1) (variable p2))
-        (add-poly p1 (negate p2))
-        (error "Polys not in same var -- ADD-POLY"
+        (make-poly (variable p1) 
+                   (sub-terms (term-list p1)
+                              (term-list p2)))
+        (error "Polys not in same var -- SUB-POLY"
                (list p1 p2))))
+
+  (define (sub-terms L1 L2)
+    (add-terms L1 (negate-terms L2)))
 
   (define (dense-poly->sparse-poly) (...))
 
