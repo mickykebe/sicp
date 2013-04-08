@@ -1,8 +1,10 @@
 ;a
 (define (pseudoremainder-terms L1 L2)
     (let ((int-factor (list (make-term 0 
-                                       (- (order (first-term L1)) 
-                                          (order (first-term L2)))))))
+                                       (exp (coeff L2)
+                                            (+ 1
+                                               (- (order (first-term L1)) 
+                                                  (order (first-term L2)))))))))
         (cadr (div-terms (mul-terms int-factor L1) L2)))
 
 (define (gcd-terms a b)
