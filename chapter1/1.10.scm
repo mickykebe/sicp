@@ -88,4 +88,4 @@ Answer2:65536
 Answer3:65536
 Answer4:2n
 Answer5:2^n
-Answer6:2^(2^n-1)
+Answer6:2^2^2^...(n-times)
