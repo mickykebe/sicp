@@ -55,6 +55,6 @@
 ;                                              body: body-of-dispatch        (call to dispatch)   (call to deposit)
 
 
-; The other 2: ((acc 'withdraw) 60) & (define acc2 (make-account 100)) are have similar structures to the ones above respectively and will be ignored.
+; The other 2: ((acc 'withdraw) 60) & (define acc2 (make-account 100)) have similar structures to the ones above respectively and will be ignored.
 
-; As to the questions they can be easily deduced from the diagrams and a few seconds of rumination and so will also be ignored. (I really don't want to draw the other 2 diagrams :) )
+; As to the questions they can be easily deduced from the diagrams along with a few seconds of rumination and so will also be ignored. (I really don't want to draw the other 2 diagrams :) )
