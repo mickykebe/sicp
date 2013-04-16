@@ -11,7 +11,7 @@
 ; 3 paired structure where count-pairs returns 3:
 
  (define z (list 'a 'b 'c))
- (count-change z)
+ (count-pairs z)
 
 ;z ---> [.][.] --> [.][.] --> [.][/]
 ;        v          v          v
@@ -19,9 +19,9 @@
 
 ; 3 paired structure where count-pairs returns 4:
 
- (define x (list a b))
+ (define x (list 'a 'b))
  (define z (cons x (cdr x)))
- (count-change z)
+ (count-pairs z)
 
 ;z ---> [.][.]-----\
 ;        v         v
@@ -34,7 +34,7 @@
  (define x (list 'a))
  (define y (cons x x))
  (define z (cons y y))
- (count-change z)
+ (count-pairs z)
 
 ;z ---> [.][.]
 ;        v  v
