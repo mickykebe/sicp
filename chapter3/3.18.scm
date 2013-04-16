@@ -1,0 +1,13 @@
+(define (contains-cycle? x)
+    (define prev-pairs (list x))
+    (define (cc? cur)
+        (cond ((null? cur) false)
+              ((elem-in-set? (cdr cur) prev-pairs) true)
+              (else (begin (set! prev-pairs (cons cur prev-pairs)) 
+                           (cc? (cdr cur))))))
+    (cc? x))
+
+(define (elem-in-set? elem set)
+    (cond ((null? set) false)
+          ((eq? elem (car set)) true)
+          (else (elem-in-set? elem (cdr set)))))
