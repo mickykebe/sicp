@@ -39,10 +39,7 @@
 ;During call to (set-signal! input-1 1)
 ;agenda entries
 ;spawned by: change to input-1. entry: (+ (current-time agenda) or-gate-delay) execute (set-signal! d (logical-or input-1 input-2))
-;spawned by: change to d. entry: (+ (current-time agenda) and-gatedelay) execute (set-signal! s (logical-and d e))
 ;spawned by: change to input-1. entry:(+ (current-time agenda) and-gatedelay) execute (set-signal! c (logical-and input-1 input-2))
-;spawned by: change to c. entry: (+ (current-time agenda) inverter-delay) execute (set-signal! e (logical-not c))
-;spawned by: change to e. entry: (+ (current-time agenda) and-gatedelay) execute (set-signal! s (logical-and d e))
 
 ;Propagate executes all the entries one after the other.
 
