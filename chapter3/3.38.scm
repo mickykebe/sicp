@@ -10,12 +10,12 @@
 ;A:
 
 ;1) Peter -> Paul -> Mary = 45
-;2) Peter -> Mary -> Paul = 55
+;2) Peter -> Mary -> Paul = 35
 ;3) Paul -> Peter -> Mary = 45
 ;4) Paul -> Mary -> Peter = 50
 ;5) Mary -> Peter -> Paul = 40
 ;6) Mary -> Paul -> Peter = 40
-; Possible values: 40, 45, 50, 55
+; Possible values: 35, 40, 45, 50, 55
 
 ;Q: List all the different possible values for balance after these three transactions have been completed, assuming that the banking system forces the three processes to run sequentially in some order.
 
@@ -33,7 +33,7 @@
 ;       |                     |                    access balance: 100
 ;       |                     |                      |
 ;       |                     |                      v
-;       |                     v                    new value: 100/2 = 50
+;       |                     v                    new value: (100- 100/2) = 50
 ;       v                  new value: 100-20 = 80    |
 ; new value: 100+10 = 110     |                      |
 ;       |                     v                      |
