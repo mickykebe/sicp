@@ -4,14 +4,9 @@
         (else
          (let ((s1car-weight (weight-proc (stream-car s1)))
                (s2car-weight (weight-proc (stream-car s2))))
-           (cond ((< s1car-weight s2car-weight)
-                  (cons-stream (stream-car s1) (merge-weighted (stream-cdr s1) s2 weight-proc)))
-                 ((> s1car-weight s2car-weight)
-                  (cons-stream (stream-car s2) (merge-weighted s1 (stream-cdr s2) weight-proc)))
-                 (else
-                  (cons-stream (stream-car s1)
-                               (merge-weighted (stream-cdr s1)
-                                      (stream-cdr s2) weight-proc))))))))
+           (if (< s1car-weight s2car-weight)
+               (cons-stream (stream-car s1) (merge-weighted (stream-cdr s1) s2 weight-proc))
+               (cons-stream (stream-car s2) (merge-weighted s1 (stream-cdr s2) weight-proc))))))))
 
 (define (weighted-pairs s t weight-proc)
     (cons-stream
@@ -19,7 +14,7 @@
         (merge-weighted
             (stream-map (lambda (x) (list (stream-car s) x))
                         (stream-cdr t))
-            (weighted-pairs (stream-cdr s) (stream-cdr t))
+            (weighted-pairs (stream-cdr s) (stream-cdr t) weight-proc)
             weight-proc)))
 
 ;a
@@ -30,14 +25,14 @@
 (display-n-stream ordered-pairs1 10)
 ;(1 1)
 ;(1 2)
+;(2 2)
 ;(1 3)
+;(2 3)
 ;(1 4)
-;(1 5)
+;(3 3)
 ;(2 4)
-;(1 6)
-;(2 5)
-;(1 7)
-;(2 6)
+;(1 5)
+;(3 4)
 
 ;b
 (define ordered-pairs2 (stream-filter (lambda (pair)
@@ -62,4 +57,4 @@
 ;(1 23)
 ;(1 29)
 ;(1 31)
-;(1 37)
+;(7 7)
