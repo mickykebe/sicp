@@ -1,4 +1,3 @@
-;weight procedure
 (define (ramanujan-weight pair)
     (let ((i (car pair))
           (j (cadr pair)))
