@@ -13,7 +13,8 @@
         (let ((cur (stream-car pairs))
               (next (stream-car (stream-cdr pairs))))
             (cond ((= (ramanujan-weight cur) (ramanujan-weight next))
-                    (display-pair cur)
+                    (display (ramanujan-weight cur))
+                    (display "\n")
                     (search-ram-pairs (stream-cdr pairs) (- n 1)))
                   (else (search-ram-pairs (stream-cdr pairs) n))))))
 
@@ -23,3 +24,5 @@
     (display ", ")
     (display (cadr p))
     (display ")\n"))
+
+(search-ram-pairs ramanujan-weighted-pairs 6)
