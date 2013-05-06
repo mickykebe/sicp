@@ -26,3 +26,9 @@
     (display ")\n"))
 
 (search-ram-pairs ramanujan-weighted-pairs 6)
+;1729
+;4104
+;13832
+;20683
+;32832
+;39312
