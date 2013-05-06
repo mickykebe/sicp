@@ -8,17 +8,17 @@
                                                  integers
                                                  ramanujan-weight))
 
-(define (search-ram-pairs pairs n)
+(define (search-pairs pairs weight-proc n)
     (if (> n 0)
         (let ((cur (stream-car pairs))
               (next (stream-car (stream-cdr pairs))))
-            (cond ((= (ramanujan-weight cur) (ramanujan-weight next))
-                    (display (ramanujan-weight cur))
+            (cond ((= (weight-proc cur) (weight-proc next))
+                    (display (weight-proc cur))
                     (display "\n")
-                    (search-ram-pairs (stream-cdr pairs) (- n 1)))
-                  (else (search-ram-pairs (stream-cdr pairs) n))))))
+                    (search-pairs (stream-cdr pairs) weight-proc (- n 1)))
+                  (else (search-pairs (stream-cdr pairs) weight-proc n))))))
 
-(search-ram-pairs ramanujan-weighted-pairs 6)
+(search-pairs ramanujan-weighted-pairs ramanujan-weight 6)
 ;1729
 ;4104
 ;13832
