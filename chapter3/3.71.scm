@@ -18,13 +18,6 @@
                     (search-ram-pairs (stream-cdr pairs) (- n 1)))
                   (else (search-ram-pairs (stream-cdr pairs) n))))))
 
-(define (display-pair p)
-    (display "(")
-    (display (car p))
-    (display ", ")
-    (display (cadr p))
-    (display ")\n"))
-
 (search-ram-pairs ramanujan-weighted-pairs 6)
 ;1729
 ;4104
