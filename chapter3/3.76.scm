@@ -8,4 +8,4 @@
                                            lavpt)
                      (make-crossings (stream-cdr stream)
                                      (stream-car stream))))
-    (make-croosings (smooth input-stream last-value) last-avpt))
+    (make-crossings (smooth input-stream last-value) last-avpt))
