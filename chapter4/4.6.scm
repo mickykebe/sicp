@@ -32,4 +32,4 @@
 (define (let-exps exp)
     (map cadr (cadr exp)))
 (define (let-body exp)
-    (caddr exp))
+    (cddr exp))
