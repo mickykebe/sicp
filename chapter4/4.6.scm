@@ -33,3 +33,5 @@
     (map cadr (cadr exp)))
 (define (let-body exp)
     (cddr exp))
+(define (make-let var-exps body)
+    (list 'let var-exps body))
