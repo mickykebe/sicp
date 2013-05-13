@@ -1,3 +1,4 @@
+;do implemented according to http://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Iteration.html
 (define (do? exp) (tagged-list? exp 'do))
 
 (define (do-var-init-step-seq exp) (cadr exp))
@@ -12,9 +13,9 @@
 
 (define (make-let-bindings vars exps) (map (lambda (var exp) (list var exp)) vars exps))
 (define (do->combination exp)
-    (sequence->exp (list (make-define 'do_comb (make-lambda (do-variables exp)
+    (sequence->exp (list (make-define 'do_iter (make-lambda (do-variables exp)
                                                             (make-if (do-test exp)
                                                                      (do-end-exps exp)
                                                                      (append (do-body exp)
-                                                                             (cons 'do_comb (do-steps exp))))))
-                         (cons 'do_comb (do-inits exp)))))
+                                                                             (cons 'do_iter (do-steps exp))))))
+                         (cons 'do_iter (do-inits exp)))))
