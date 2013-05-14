@@ -50,3 +50,5 @@
             (set-car! values val)
             (set (cdr variables) (cdr values))))
     (set (frame-variables frame) (frame-values frame)))
+
+;Abstraction beyond this level is definitely achievable, but I think it comes at the expense of readability.
