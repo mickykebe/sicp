@@ -228,20 +228,6 @@
           (frame-values frame))))
 
 ;Running the evaluator as a program
-(define (setup-environment)
-  (let ((initial-env
-         (extend-environment (primitive-procedure-names)
-                             (primitive-procedure-objects)
-                             the-empty-environment)))
-    (define-variable! 'true true initial-env)
-    (define-variable! 'false false initial-env)
-    initial-env))
-(define the-global-environment (setup-environment))
-
-(define (primitive-procedure? proc)
-  (tagged-list? proc 'primitive))
-(define (primitive-implementation proc) (cadr proc))
-
 (define primitive-procedures
   (list (list 'car car)
         (list 'cdr cdr)
@@ -251,7 +237,6 @@
         (list '* *)
         (list '- -)
         (list '/ /)
-        (list 'map map)
         ;<more primitives>
         ))
 (define (primitive-procedure-names)
@@ -265,6 +250,20 @@
 (define (apply-primitive-procedure proc args)
   (apply-in-underlying-scheme
    (primitive-implementation proc) args))
+
+(define (setup-environment)
+  (let ((initial-env
+         (extend-environment (primitive-procedure-names)
+                             (primitive-procedure-objects)
+                             the-empty-environment)))
+    (define-variable! 'true true initial-env)
+    (define-variable! 'false false initial-env)
+    initial-env))
+(define the-global-environment (setup-environment))
+
+(define (primitive-procedure? proc)
+  (tagged-list? proc 'primitive))
+(define (primitive-implementation proc) (cadr proc))
 
 ;Must be set before our apply is defined
 (define apply-in-underlying-scheme apply)
