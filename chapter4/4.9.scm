@@ -1,3 +1,4 @@
+;untested
 ;do implemented according to http://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Iteration.html
 (define (do? exp) (tagged-list? exp 'do))
 
