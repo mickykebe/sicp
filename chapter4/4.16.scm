@@ -20,18 +20,18 @@
 (define (scan-out-defines body-exps)
     ;Produces ( ((u '*unassigned*) (set! u <e1>)) ((v '*unassigned*) (set! v <e2>)) ...)
     (define (make-var-bod-seq body-exps)
-        (let ((cur-exp (car body-exps)))
-            (if (definition? cur-exp)
-                (let ((var (definition-variable cur-exp)))
-                    (cons (cons (list var ''*unassigned*)
-                                (list 'set! var (definition-value cur-exp)))
-                          (make-var-bod-seq (cdr body-exps))))
-                '())))
-    ;Retreives the non-definition expressopns
+        (cond ((null? body-exps) '())
+              ((definition? (car body-exps)) (let ((var (definition-variable (car body-exps))))
+                                        (cons (cons (list var ''*unassigned*)
+                                                    (list 'set! var (definition-value (car body-exps))))
+                                              (make-var-bod-seq (cdr body-exps)))))
+              (else (make-var-bod-seq (cdr body-exps)))))
+    ;Retreives the non-definition expressions
     (define (rest-exps body-exps)
         (cond ((null? body-exps) '())
               ((definition? (car body-exps)) (rest-exps (cdr body-exps)))
-              (else body-exps)))
+              (else (cons (car body-exps) 
+                          (rest-exps (cdr body-exps))))))
     (let ((seq (make-var-bod-seq body-exps)))
         (if (null? seq)
             body-exps
@@ -39,8 +39,8 @@
                             (sequence->exp (append (map cdr seq) 
                                                    (rest-exps body-exps))))))))
 
+
 ;Better to modify make-procedure. "scanning out" will be done once, whereas it would have been done every time a procedure is executed if it were called inside procedure-body.
 
 (define (make-procedure parameters body env)
-  (let ((sb (scan-out-defines body)))
-    (list 'procedure parameters sb env)))
+    (list 'procedure parameters (scan-out-defines body) env))
