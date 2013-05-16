@@ -33,12 +33,6 @@
         (cond ((null? body-exps) '())
               ((definition? (car body-exps)) (cons (car body-exps) (define-exps (cdr body-exps))))
               (else (define-exps (cdr body-exps)))))
-    (define (make-var-bod-seq define-exps)
-        (map (lambda (exp)
-                (let ((var (definition-variable exp)))
-                    (cons (list var ''*unassigned*)
-                          (list 'set! var (definition-value exp)))))
-            define-exps))
     ;Retreives the non-definition expressions
     (define (rest-exps body-exps)
         (cond ((null? body-exps) '())
