@@ -16,7 +16,7 @@
     (define x <e1>)
     (define y <e2>)
     <e3>)
-;E1((primitives (p, ('procedure <p-params> <scoped-out-body>))) empty-env)
+;GE((primitives (p, ('procedure <p-params> <scoped-out-body>))) empty-env)
 ;N.B. Here empty-env = (let ((x '*unassigned*) (y '*unassigned*)) (set! x <e1>) (set! y <e2>) <e3>)
 (p 3)
 ;E1(((a, 3)) GE)
