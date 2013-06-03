@@ -18,6 +18,9 @@
         ((or? exp) (analyze-or exp))
         ;-----------4.22-----------------------------
         ((let? exp) (analyze (let->combination exp)))
+        ;-----------4.50-----------------------------
+        ((ramb? exp) (analyze-ramb exp))
+        ;--------------------------------------------
         ((application? exp) (analyze-application exp))
         (else
          (error "Unknown expression type -- ANALYZE" exp))))
@@ -171,6 +174,36 @@
                            (lambda ()
                              (try-next (cdr choices))))))
       (try-next cprocs))))
+
+;---------------------4.50-----------------------
+(define (ramb? exp) (tagged-list? exp 'ramb))
+(define (ramb-choices exp) (cdr exp))
+
+(define (analyze-ramb exp)
+  (let ((cprocs (map analyze (ramb-choices exp))))
+    (lambda (env succeed fail)
+      (define (nth choices n)
+        (define (loop choices i)
+            (if (= n i)
+                (car choices)
+                (loop (cdr choices) (+ i 1))))
+        (loop choices 0))
+      (define (except choices n)
+        (define (loop choices i)
+            (if (= i n) 
+                (cdr choices)
+                (cons (car choices) (loop (cdr choices) (+ i 1)))))
+        (loop choices 0))
+      (define (try-next choices)
+            (if (null? choices)
+                (fail)
+                (let ((i (random (length choices))))
+                    ((nth choices i) env
+                                     succeed
+                                     (lambda ()
+                                        (try-next (except choices i)))))))
+      (try-next cprocs))))
+;------------------------------------------------
 
 (define (execute-application proc args succeed fail)
   (cond ((primitive-procedure? proc)
