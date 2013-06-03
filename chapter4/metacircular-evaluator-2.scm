@@ -393,6 +393,10 @@
         (list '/ /)
         (list '= =)
         (list 'display display)
+        (list 'list list)
+        (list 'not not)
+        (list 'abs abs)
+        (list 'eq? eq?)
         ;<more primitives>
         ))
 (define (primitive-procedure-names)
