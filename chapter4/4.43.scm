@@ -64,4 +64,7 @@
                           (owner-of (daughter-of 'Parker (list gabrielle lorna rosalind melissa maryann)))))
                         (list 'father-of-lorna (father-of lorna))))))))
 
+;Output:
+;(father-of-lorna downing)
+
 ;There would have been 2 solutions if the mentioned restrictioned was absent.
