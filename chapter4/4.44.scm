@@ -9,16 +9,16 @@
 (define (vertical-safe? q queens)
     (cond ((null? queens) true)
           ((= (col-pos q) (col-pos (car queens))) false)
-          (else (horizontal-safe? q (cdr queens)))))
+          (else (vertical-safe? q (cdr queens)))))
 
 (define (diagonal-safe? q queens)
     (cond ((null? queens) 
             true)
-          ((= (abs (- (row-pos q1) (row-pos q2)))
-              (abs (- (col-pos q1) (col-pos q2)))) 
+          ((= (abs (- (row-pos q) (row-pos (car queens))))
+              (abs (- (col-pos q) (col-pos (car queens))))) 
             false)
-          (else 
-            (horizontal-safe? q (cdr queens)))))
+          (else
+            (diagonal-safe? q (cdr queens)))))
 
 (define (chess-puzzle)
     (let ((q1 (list (amb 1 2 3 4) (amb 1 2 3 4)))
@@ -35,3 +35,6 @@
                 (require (vertical-safe? q4 (list q1 q2 q3)))
                 (require (diagonal-safe? q4 (list q1 q2 q3)))
                 (list q1 q2 q3 q4)))))
+
+;One answer:
+;((1 2) (2 4) (3 1) (4 3))
