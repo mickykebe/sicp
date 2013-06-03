@@ -397,6 +397,7 @@
         (list 'not not)
         (list 'abs abs)
         (list 'eq? eq?)
+        (list 'memq memq)
         ;<more primitives>
         ))
 (define (primitive-procedure-names)
