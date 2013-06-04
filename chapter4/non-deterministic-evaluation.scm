@@ -20,6 +20,10 @@
         ((let? exp) (analyze (let->combination exp)))
         ;-----------4.50-----------------------------
         ((ramb? exp) (analyze-ramb exp))
+        ;-----------4.51-----------------------------
+        ((permanent-assignment? exp) (analyze-permanent-assignment exp))
+        ;-----------4.52-----------------------------
+        ((if-fail? exp) (analyze-if-fail exp))
         ;--------------------------------------------
         ((application? exp) (analyze-application exp))
         (else
@@ -203,6 +207,42 @@
                                      (lambda ()
                                         (try-next (except choices i)))))))
       (try-next cprocs))))
+;------------------------------------------------
+
+;---------------------4.51-----------------------
+(define (permanent-assignment? exp)
+  (tagged-list? exp 'permanent-set!))
+(define (permanent-assignment-variable exp) (cadr exp))
+(define (permanent-assignment-value exp) (caddr exp))
+
+(define (analyze-permanent-assignment exp)
+    (let ((var (permanent-assignment-variable exp))
+          (vproc (analyze (permanent-assignment-value exp))))
+        (lambda (env succeed fail)
+            (vproc env
+                   (lambda (val fail2)
+                        (set-variable-value! var val env)
+                        (succeed 'ok fail2))
+                   fail))))
+;------------------------------------------------
+
+;--------------------4.52------------------------
+(define (if-fail? exp) (tagged-list? exp 'if-fail))
+(define (if-fail-predicate exp) (cadr exp))
+(define (if-fail-alternate exp) (caddr exp))
+
+(define (analyze-if-fail exp)
+    (let ((pproc (analyze (if-fail-predicate exp)))
+          (aproc (analyze (if-fail-alternate exp))))
+        (lambda (env succeed fail)
+            (pproc env
+                   (lambda (val fail2)
+                        (succeed val fail2))
+                   (lambda ()
+                        (aproc env
+                               (lambda (val fail2)
+                                    (succeed val fail2))
+                               fail))))))
 ;------------------------------------------------
 
 (define (execute-application proc args succeed fail)
