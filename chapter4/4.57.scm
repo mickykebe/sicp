@@ -4,6 +4,7 @@
 (supervisor (Scrooge Eben) (Warbucks Oliver))
 (can-do-job (computer wizard) (computer programmer))
 
+;Answer:
 (rule (replacable-with ?person1 ?person2)
     (and (or (job ?person1 ?position1)
              (and (job ?person2 ?position2) (can-do-job ?position1 ?position2))
