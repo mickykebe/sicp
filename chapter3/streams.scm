@@ -13,7 +13,7 @@
       (begin (proc (stream-car s))
              (stream-for-each proc (stream-cdr s)))))
 
-Stream-for-each is useful for viewing streams:
+;Stream-for-each is useful for viewing streams:
 
 (define (display-stream s)
   (stream-for-each display-line s))
