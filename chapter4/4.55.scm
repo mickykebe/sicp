@@ -5,4 +5,4 @@
 (job ?name (accounting . ?job))
 
 ;c)
-(address ?name (Summerville . ?adres))
+(address ?name (Slumerville . ?adres))
