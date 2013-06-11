@@ -38,3 +38,10 @@
 ;(and (job (reasoner louis) (computer programmer trainee)) (unique (job (reasoner louis) (computer programmer trainee))))
 ;(and (job (tweakit lem e) (computer technician)) (unique (job (tweakit lem e) (computer technician))))
 ;(and (job (bitdiddle ben) (computer wizard)) (unique (job (bitdiddle ben) (computer wizard))))
+
+;Query
+(and (job ?boss ?pos) (unique (supervisor ?x ?boss)))
+
+;Result:
+;(and (job (scrooge eben) (accounting chief accountant)) (unique (supervisor (cratchet robert) (scrooge eben))))
+;(and (job (hacker alyssa p) (computer programmer)) (unique (supervisor (reasoner louis) (hacker alyssa p))))
