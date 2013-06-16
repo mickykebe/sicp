@@ -13,7 +13,7 @@
     (save continue)
     (save n)
     (save b)
-    (assign n (op -) (reg 1) (const 1))
+    (assign n (op -) (reg n) (const 1))
     (assign continue (label exp-mul))
     (goto (label exp-start))
     exp-mul
