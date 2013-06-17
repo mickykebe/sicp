@@ -32,8 +32,8 @@ there
 
 ;Both "here" labels are found inside the final label pointer table. Inside the table they also maintain their sequence with the first label "here" appearing before the second in the table also.
 
-;So assuming an instruction in finding a label from the table, searches from first to last, then the final value of a would be 3.
-;If for some reason the search is conducted in reverse a would have the value 4.
+;So assuming an instruction in finding a label from the table, searches from first to last, then the final value of "a" would be 3.
+;If for some reason the search is conducted in reverse "a" would have the value 4.
 
 ;Modification
 (define (extract-labels text receive)
