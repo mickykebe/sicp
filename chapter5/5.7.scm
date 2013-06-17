@@ -1,5 +1,5 @@
 ;a)
-(define gcd-machine
+(define exp-machine
   (make-machine
    '(continue n b val)
    (list (list '- -) (list '= =) (list '* *))
@@ -24,10 +24,19 @@
      (goto (reg continue))
      exp-end)))
 
+;The following results were found after implementing the simulator defined in sections 5.2.1 - 5.2.3.
+
+;(set-register-contents! exp-machine 'b 2)
+;(set-register-contents! exp-machine 'n 3)
+;(start exp-machine)
+;(get-register-contents exp-machine 'val)
+
+;Output = 8
+
 ;b)
-(define gcd-machine
+(define exp-it-machine
   (make-machine
-   '(n counter product)
+   '(b n counter product)
    (list (list '- -) (list '= =) (list '* *))
    '((assign counter (reg n))
      (assign product (const 1))
@@ -38,3 +47,12 @@
      (assign product (op *) (reg b) (reg product))
      (goto (label exp-iter))
      exp-end)))
+
+;Results
+
+;(set-register-contents! exp-it-machine 'b 3)
+;(set-register-contents! exp-it-machine 'n 2)
+;(start exp-it-machine)
+;(get-register-contents exp-it-machine 'product)
+
+;Output = 9
