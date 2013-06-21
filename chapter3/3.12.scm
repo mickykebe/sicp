@@ -33,7 +33,7 @@ w
 
 ;Explanation
 
-;Here x, after append is executed, both x and y point to the same structure
+;Here x, after append is executed, both x and w point to the same structure
 ;After append
 
 ; x ---> [.][.]--->[.][.] --\
