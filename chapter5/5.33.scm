@@ -3,7 +3,7 @@
       1
       (* n (factorial-alt (- n 1)))))
 
-;The previous version executes faster. Since arguments argument are processed last to first during compilation, in this version factorial-alt inside the body causes an accumulation of env in the stack. This wouldn't happen in the previous version since the call to factorial is the first argument to * and compiled last in the argument list. This all rests on the fact that the last argument to be processed(the first argument in the code) is done so without considering the stack.
+;The previous version executes faster. Since arguments argument are processed last to first during compilation, in this version factorial-alt inside the body causes an accumulation of env in the stack. This wouldn't happen in the previous version since the call to factorial is the first argument to * and compiled last in the argument list. This all rests on the fact that the last argument to be processed(the first argument in the code) is done so without making any additions to the stack that require later restoration. 
 
 ;Test
 
