@@ -5,7 +5,7 @@
               (else (frame-loop var (cdr variables) (+ i 1)))))
     (define (env-loop e i)
         (if (eq? e the-empty-environment)
-            (error "Unbound variable " var)
+            'not-found
             (let ((frame-index (frame-loop var (car e) 0)))
                 (if (< frame-index 0)
                     (env-loop (cdr e) (+ i 1))
