@@ -1,7 +1,7 @@
 (define (compile-variable exp target linkage c-env)
     (let ((lex-addr (find-variable exp c-env)))
         (if (eq? lex-addr 'not-found)
-            (compile-normal-lookup exp linkage)
+            (compile-normal-lookup exp target linkage)
             (end-with-linkage linkage
                 (make-instruction-sequence '(env) (list target)
                     `((assign ,target
@@ -9,7 +9,7 @@
                               (reg env)
                               (const ,lex-addr))))))))
 
-(define (compile-normal-lookup exp linkage)
+(define (compile-normal-lookup exp target linkage)
   (end-with-linkage linkage
    (make-instruction-sequence '(env) (list target)
     `((assign ,target
